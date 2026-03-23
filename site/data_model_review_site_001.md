@@ -205,4 +205,9 @@ Append-only enforcement: override `save()` and `delete()` to raise `NotImplement
 
 ## Owner Sign-Off
 
-Please confirm or redirect on D1, D2, and D3 above. Once signed off, ISS-101 resolves and Claire starts ISS-102.
+**Owner — 2026-03-23:**
+- D1: `contact/` standalone app — approved
+- D2: `ProductImage.alt_text` as single `CharField` — approved
+- D3: `Order`, `OrderItem`, `Payment`, `Customer` stubs included in ISS-103 — approved
+
+ISS-101 resolved. Claire to start ISS-102 immediately.
