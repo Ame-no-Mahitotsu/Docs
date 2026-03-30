@@ -45,7 +45,7 @@ These constraints were set before any technology choices and drive all decisions
 | Auth (customer, future) | SimpleJWT | — | Stateless, separate from admin domain |
 | Testing (Django) | pytest + pytest-django | — | TDD contract |
 | Testing (Next.js) | Jest + React Testing Library | — | TDD contract |
-| Hosting | DigitalOcean Frankfurt | 2-core / 4GB RAM | EU jurisdiction, GDPR, cloud firewall, ~€18/month |
+| Hosting | Hetzner Cloud CPX21, Nuremberg/Falkenstein (DE) | 3 AMD vCPU / 4 GB RAM / 80 GB NVMe | German GmbH entity, ISO 27001, GDPR, ~€11.30/month all-in. Supersedes DigitalOcean Frankfurt (2026-03-12). See `docs/site/vps_provider_comparison.md`. |
 
 **Rejected alternatives (not to be reopened without new evidence):**
 
@@ -132,8 +132,8 @@ Text fields that require translation use a **TranslatedField** approach: a relat
 - Consistent pattern across all translatable content.
 
 ```
-Product (id, price, created_at, updated_at)
-    └── ProductTranslation (product FK, language FK, name, description, slug)
+Product (id, slug, price, created_at, updated_at)
+    └── ProductTranslation (product FK, language FK, name, description)
 ```
 
 This pattern applies to all content entities below.
@@ -147,6 +147,7 @@ This pattern applies to all content entities below.
 | Field | Type | Notes |
 |---|---|---|
 | id | UUID | Primary key |
+| slug | SlugField | Language-neutral; unique; used in all API and frontend URLs |
 | price | DecimalField | Euro cents stored as decimal |
 | is_active | BooleanField | Soft visibility toggle |
 | created_at | DateTimeField | Auto |
@@ -160,7 +161,6 @@ This pattern applies to all content entities below.
 | language | FK → Language | |
 | name | CharField | |
 | description | TextField | |
-| slug | SlugField | Used in URLs; unique per language |
 
 **ProductImage**
 
